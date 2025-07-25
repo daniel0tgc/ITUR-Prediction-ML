@@ -1,0 +1,71 @@
+# Quick Concepts Guide for ML_Updated.py
+
+This file is a concise reference to the main concepts and terms used in the ML_Updated.py pipeline for urbanization prediction from Sentinel-2 satellite images.
+
+---
+
+## Key Concepts & Terms
+
+### ITUR
+
+- **ITUR**: A continuous value representing the level of urbanization for a given region or cell. The target variable for prediction.
+
+### Sentinel-2 Bands
+
+- **Sentinel-2**: A European Space Agency satellite providing multispectral images.
+- **Bands**: 13 spectral bands (B01–B12, B8A) covering visible, near-infrared, and shortwave infrared wavelengths. Each band captures different information about the Earth's surface.
+
+### Spectral Indices
+
+- **Spectral Index**: A mathematical combination of two or more bands to highlight specific surface features (e.g., vegetation, water, built-up areas).
+- **Common Indices Used**:
+  - **NDVI**: Normalized Difference Vegetation Index (vegetation health)
+  - **NDBI**: Normalized Difference Built-up Index (urban/built-up areas)
+  - **SAVI**: Soil Adjusted Vegetation Index
+  - **MSAVI**: Modified SAVI
+  - **NDWI**: Normalized Difference Water Index
+  - **NMDI**: Normalized Multi-band Drought Index
+  - **NBR**: Normalized Burn Ratio
+- **spyndex**: Python library used to compute these indices from band data.
+
+### Custom Channels
+
+- **Custom Channels**: The set of bands and/or indices used as input features for the model. You can specify any combination to optimize model performance.
+
+### Pretrained Weights
+
+- **Pretrained Weights**: Model parameters learned from large datasets (e.g., ImageNet, Sentinel-2) and used to initialize the model for faster convergence and better performance.
+- **TorchGeo/torchvision**: Libraries providing pretrained models for remote sensing and general vision tasks.
+
+### Early Stopping
+
+- **Early Stopping**: A training strategy that halts training when validation performance stops improving, preventing overfitting and saving compute time. The best model weights are restored automatically.
+- **Patience**: Number of epochs to wait for improvement before stopping.
+- **Minimum Delta**: Minimum change to qualify as an improvement.
+
+### Data Augmentation
+
+- **Data Augmentation**: Random transformations (e.g., flips, rotations, noise) applied to training images to improve model generalization and robustness.
+- **albumentations**: Library used for fast, flexible image augmentation.
+
+### Evaluation Metrics
+
+- **MSE (Mean Squared Error)**: Average squared difference between predictions and true values. Penalizes large errors more.
+- **MAE (Mean Absolute Error)**: Average absolute difference between predictions and true values. Easier to interpret, less sensitive to outliers.
+- **R² (Coefficient of Determination)**: Measures how well predictions explain the variance in the data. 1.0 = perfect, 0.0 = predicts mean, <0.0 = worse than mean.
+
+### Data Splits
+
+- **Train/Validation/Test**: Standard practice to split data into training (fit model), validation (tune/stop model), and test (final evaluation) sets. Pre-matched CSVs are recommended for large datasets. My split included 50, 20, 30 for train, validate, and test respectively.
+
+### Model Adaptation
+
+- **Input Layer Adaptation**: The model's first convolutional layer is automatically adjusted to accept the number of input channels specified by your custom channels.
+
+### Robust Error Handling
+
+- The pipeline includes checks and warnings for missing files, mismatched channels, non-finite values, and other common issues.
+
+---
+
+Use this guide as a reference for understanding the main methods and terminology in ML_Updated.py. For workflow and setup, see the README.
