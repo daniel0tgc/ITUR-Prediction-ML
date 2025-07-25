@@ -1,0 +1,28 @@
+Error: XGBoost Training Process Was Killed
+==========================================
+
+Cause:
+------
+- The process was killed by the operating system due to running out of memory (RAM).
+- Your feature matrix is very large: (188601 samples, 13248 features).
+- XGBoost with cross-validation and n_jobs=-1 tries to run many fits in parallel, multiplying memory usage.
+- The system could not handle the memory demand and terminated the process.
+
+Next Steps:
+-----------
+1. Reduce the number of features:
+   - Use fewer bands/indices, or apply dimensionality reduction (e.g., PCA).
+2. Reduce the number of samples:
+   - Try training on a smaller subset of your data.
+3. Reduce parallelism:
+   - Set n_jobs=1 in RandomizedSearchCV to limit memory usage.
+4. Reduce the number of candidates:
+   - Lower n_iter (e.g., try 10 or 20 instead of 200).
+5. (Optional) Increase swap space:
+   - This may prevent OOM kills but will slow down training.
+
+Recommended Immediate Actions:
+------------------------------
+- Set n_jobs=1 and n_iter=10 in your RandomizedSearchCV.
+- Try with a smaller dataset or fewer features to confirm the pipeline works.
+- Gradually scale up as resources allow.
