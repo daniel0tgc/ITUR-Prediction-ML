@@ -2,6 +2,9 @@
 
 This repository provides a machine learning pipeline to predict urbanization levels (ITUR values) from Sentinel-2A satellite images. The pipeline leverages deep learning with pretrained weights, advanced spectral indices, and robust training strategies such as early stopping.
 
+Technical report: Urbanization_Prediction_from_Sentinel_2_Imagery_Using_Deep_Multispectral_Regression.pdf 
+Find under READ.ME file.
+
 ## Key Features
 
 - **Urbanization Prediction**: Predicts ITUR (urbanization) values from Sentinel-2A satellite imagery.
